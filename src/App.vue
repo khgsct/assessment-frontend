@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import Header from "./components/HeaderComponent.vue";
-import Footer from "./components/FooterComponent.vue";
+import Header from "@/components/HeaderComponent.vue";
+import Footer from "@/components/FooterComponent.vue";
 </script>
 
 <template>
@@ -14,7 +14,7 @@ import Footer from "./components/FooterComponent.vue";
   <main class="container mx-auto px-4 py-6 mb-auto">
     <div class="grid grid-cols-12 gap-2 w-full">
       <div class="col-span-12 md:col-span-4">
-        <span class="text-black font-light md:text-[30px] lg:text-[40px] leading-none">Welcome<br class="hidden md:inline" /> Back</span>
+        <!-- <span class="text-black font-light md:text-[30px] lg:text-[40px] leading-none">Welcome<br class="hidden md:inline" /> Back</span> -->
       </div>
       <div class="col-span-12 md:col-span-8">
         <RouterView />

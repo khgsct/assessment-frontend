@@ -16,7 +16,7 @@ const router = createRouter({
     },
     {
       path: '/products/:id',
-      name: 'product details',
+      name: 'product-details',
       component: () => import('../views/ProductDetailsView.vue')
     },
     {
@@ -24,6 +24,7 @@ const router = createRouter({
       name: 'checkout',
       component: () => import('../views/CheckoutView.vue')
     },
+    { path: '/:pathMatch(.*)*', name: 'not-found', component: AuthView },
   ]
 })
 

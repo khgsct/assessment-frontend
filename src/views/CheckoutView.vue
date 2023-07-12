@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
-import ProductIncrement from "../components/ProductIncrementComponent.vue";
+import ProductIncrement from "@/components/ProductIncrementComponent.vue";
 
 const checkout = () => {
     alert('checkout complete')

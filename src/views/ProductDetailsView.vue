@@ -17,6 +17,6 @@
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
-import ProductItem from "../components/ProductItemComponent.vue";
-import ProductIncrement from "../components/ProductIncrementComponent.vue";
+import ProductItem from "@/components/ProductItemComponent.vue";
+import ProductIncrement from "@/components/ProductIncrementComponent.vue";
 </script>

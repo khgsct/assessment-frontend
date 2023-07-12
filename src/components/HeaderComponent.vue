@@ -2,7 +2,7 @@
     <div class="flex justify-between">
         <div class="inline-flex items-center">
             <Icon class="text-[40px] text-red-500 pr-2 pb-[10px]" icon="clarity:shopping-bag-solid" />
-            <strong class="text-[30px] font-light uppercase leading-none">Shopping online</strong>
+            <strong class="text-[20px] font-light uppercase leading-none">ASSESSMENT</strong>
         </div>
         <div class="space-y-2 cursor-pointer md:hidden" v-on:click="toggleMenu()">
             <div class="w-8 h-0.5 bg-gray-600"></div>
