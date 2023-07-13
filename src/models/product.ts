@@ -3,3 +3,7 @@ export type ProductResponse = {
     name: string,
     price: number
 }
+
+export type ProductDetailsResponse = {
+    description: string
+} & ProductResponse

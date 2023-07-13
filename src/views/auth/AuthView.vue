@@ -76,6 +76,6 @@ const signin = async () => {
       .then(() => router.push({path: '/products'}))
       .catch((error: HttpError) => state.errorMsg = error.message)
       .finally(() => state.loader = false)
-  }, SimulationDelay);
+  }, SimulationDelay)
 }
 </script>

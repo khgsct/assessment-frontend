@@ -14,6 +14,10 @@ const props = defineProps({
     quantity: {
         required: true,
         type: Number
+    },
+    minValue: {
+        requied: false,
+        type: Number
     }
 })
 const emit = defineEmits<{
@@ -28,13 +32,13 @@ const increment = () => {
 }
 
 const decrement = () => {
-    if (quantity.value == 0)
+    if (quantity.value == props.minValue ?? 0)
         return
     quantity.value--
     emit('change', quantity.value)
 }
 
-emit('change', quantity.value)
+// emit('change', quantity.value)
 
 </script>
 

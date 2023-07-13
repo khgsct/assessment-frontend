@@ -1,5 +1,4 @@
 <template>
-    {{ a }}
     <div class="grid grid-cols-12 gap-3">
         <div class="col-span-12 md:col-span-4">
             <ProductItem :product="state.productDetails" v-show="!state.loader" />
@@ -8,7 +7,7 @@
         <div class="col-span-12 md:col-span-8">
             <div v-show="!state.loader" class="flex flex-col gap-y-4">
                 <p class="pr-4 text-sm text-gray-600">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. A magni modi sequi aliquid. Quos iste voluptatem laudantium quia, at ad et facilis, odio, ab accusamus delectus quae repellendus vel a!
+                    {{ state.productDetails?.description }}
                 </p>
                 <div>
                     <ProductIncrement :quantity="state.quantity" @change="productIncrementChange($event)" />
@@ -16,8 +15,8 @@
                         <span class="text-red-500">{{ error.$message }}</span>
                     </div>
                 </div>
-                <button class="btn-primary w-[30px]" v-on:click="navigateToCartPage">
-                    Add to cart
+                <button class="btn-primary min-w-[130px] w-[120px]" v-on:click="navigateToCartPage" :disabled="state.saving">
+                    <Icon icon="eos-icons:bubble-loading" v-show="state.saving" class="inline-block" /> Add to cart
                 </button>
             </div>
             <div v-show="state.loader">
@@ -35,22 +34,22 @@
 
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router';
+import { Icon } from '@iconify/vue';
 import ProductItem from "@/components/product/ProductItemComponent.vue";
 import ProductItemLoader from "@/components/product/ProductItemLoaderComponent.vue";
 import ProductIncrement from "@/components/product/ProductIncrementComponent.vue";
-import { product } from '@/http';
-import type { ProductResponse } from '@/models';
-import { reactive, ref } from 'vue';
+import { cart, product } from '@/http';
+import type { ProductDetailsResponse } from '@/models';
+import { reactive } from 'vue';
 import { SimulationDelay } from "@/configs";
 import useVuelidate from '@vuelidate/core';
 import { required, minValue } from '@vuelidate/validators';
 
-const a = ref("gg")
-
 type StateModel = {
-    productDetails: ProductResponse | null,
+    productDetails: ProductDetailsResponse | null,
     quantity: number,
-    loader: boolean
+    loader: boolean,
+    saving: boolean
 }
 
 const router = useRouter()
@@ -60,7 +59,8 @@ const productId = route.params.id.toString()
 const state = reactive<StateModel>({
     productDetails: null,
     quantity: 0,
-    loader: true
+    loader: true,
+    saving: false,
 })
 
 const $v = useVuelidate({
@@ -78,13 +78,23 @@ const productIncrementChange = (quantity: number) => {
     state.quantity = quantity
 }
 
+const updateCart = () => {
+        cart().updateCart(productId, state.quantity)
+            .finally(() => state.saving = false)
+}
+
 const navigateToCartPage = async () => {
     const valid = await $v.value.$validate()
     if (!valid)
         return
-    router.push({path: '/checkout'})
+
+    state.saving = true
+    setTimeout(() => {
+        updateCart()
+        router.push({path: '/checkout'})
+    }, SimulationDelay)
 }
 
-setTimeout(loadProductDetails, SimulationDelay);
+setTimeout(loadProductDetails, SimulationDelay)
 
 </script>

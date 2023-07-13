@@ -36,12 +36,12 @@ const navigateToProperView = (isAuthenticated: boolean) => {
     router.push({path:'/auth'})
 }
 
-// watch(isLoggedIn, (curr) => { 
-//   console.log(curr)
-//   navigateToProperView(curr)
-// })
+watch(isLoggedIn, (curr) => { 
+  console.log(curr)
+  navigateToProperView(curr)
+})
 
-// navigateToProperView(isLoggedIn.value)
+navigateToProperView(isLoggedIn.value)
 
 </script>
 
