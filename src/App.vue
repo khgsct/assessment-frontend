@@ -23,8 +23,8 @@
 
 <script setup lang="ts">
 import { RouterView, useRouter } from 'vue-router'
-import Header from "@/components/HeaderComponent.vue";
-import Footer from "@/components/FooterComponent.vue";
+import Header from "@/components/common/HeaderComponent.vue";
+import Footer from "@/components/common/FooterComponent.vue";
 import { computed, watch } from 'vue';
 import { user } from './auth';
 

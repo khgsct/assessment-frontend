@@ -19,8 +19,8 @@
 
 <script setup lang="ts">
 import { computed, reactive } from "vue";
-import ProductItem from "@/components/ProductItemComponent.vue";
-import ProductItemLoader from "@/components/ProductItemLoaderComponent.vue";
+import ProductItem from "@/components/product/ProductItemComponent.vue";
+import ProductItemLoader from "@/components/product/ProductItemLoaderComponent.vue";
 import { user } from "@/auth";
 import { useRouter } from 'vue-router';
 import { product } from "@/http";
