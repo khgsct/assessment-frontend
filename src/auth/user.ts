@@ -4,9 +4,12 @@ const JwtKey = 'jwt'
 
 export const user = reactive({
     isAuthenticated: false,
+    updateAuthState() {
+        this.isAuthenticated = this.getToken() != null
+    },
     updateToken(token: string): void {
         sessionStorage.setItem(JwtKey, token)
-        this.isAuthenticated = true
+        this.updateAuthState()
     },
     getToken(): string | null {
         const jwt = sessionStorage.getItem(JwtKey)
@@ -14,6 +17,6 @@ export const user = reactive({
     },
     logout(): void {
         sessionStorage.removeItem(JwtKey)
-        this.isAuthenticated = false
+        this.updateAuthState()
     }
 })

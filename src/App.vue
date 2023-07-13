@@ -1,9 +1,3 @@
-<script setup lang="ts">
-import { RouterView } from 'vue-router'
-import Header from "@/components/HeaderComponent.vue";
-import Footer from "@/components/FooterComponent.vue";
-</script>
-
 <template>
 <div class="flex flex-col h-screen">
   <header class="bg-[#F6F6F6] sticky top-0">
@@ -26,6 +20,30 @@ import Footer from "@/components/FooterComponent.vue";
   </footer>
 </div>
 </template>
+
+<script setup lang="ts">
+import { RouterView, useRouter } from 'vue-router'
+import Header from "@/components/HeaderComponent.vue";
+import Footer from "@/components/FooterComponent.vue";
+import { computed, watch } from 'vue';
+import { user } from './auth';
+
+const router = useRouter()
+const isLoggedIn = computed(() => user.isAuthenticated)
+
+const navigateToProperView = (isAuthenticated: boolean) => {
+  if (isAuthenticated == false)
+    router.push({path:'/auth'})
+}
+
+watch(isLoggedIn, (curr) => { 
+  console.log(curr)
+  navigateToProperView(curr)
+})
+
+navigateToProperView(isLoggedIn.value)
+
+</script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
