@@ -24,6 +24,11 @@ const router = createRouter({
       name: 'checkout',
       component: () => import('../views/CheckoutView.vue')
     },
+    {
+      path: '/test',
+      name: 'test',
+      component: () => import('../views/TestView.vue')
+    },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: AuthView },
   ]
 })

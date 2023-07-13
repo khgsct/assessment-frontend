@@ -5,8 +5,8 @@
       <Header />
     </nav>
   </header>
-  <main class="container mx-auto px-4 py-6 mb-auto">
-    <div class="grid grid-cols-12 gap-2 w-full">
+  <main class="container px-4 py-6 mx-auto mb-auto">
+    <div class="grid w-full grid-cols-12 gap-2">
       <div class="col-span-12 md:col-span-4">
         <!-- <span class="text-black font-light md:text-[30px] lg:text-[40px] leading-none">Welcome<br class="hidden md:inline" /> Back</span> -->
       </div>
@@ -15,7 +15,7 @@
       </div>
     </div>
   </main>
-  <footer class="container mx-auto px-4">
+  <footer class="container px-4 mx-auto">
     <Footer />
   </footer>
 </div>
@@ -36,12 +36,12 @@ const navigateToProperView = (isAuthenticated: boolean) => {
     router.push({path:'/auth'})
 }
 
-watch(isLoggedIn, (curr) => { 
-  console.log(curr)
-  navigateToProperView(curr)
-})
+// watch(isLoggedIn, (curr) => { 
+//   console.log(curr)
+//   navigateToProperView(curr)
+// })
 
-navigateToProperView(isLoggedIn.value)
+// navigateToProperView(isLoggedIn.value)
 
 </script>
 

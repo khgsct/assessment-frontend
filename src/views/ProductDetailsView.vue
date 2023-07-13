@@ -1,4 +1,5 @@
 <template>
+    {{ a }}
     <div class="grid grid-cols-12 gap-3">
         <div class="col-span-12 md:col-span-4">
             <ProductItem :product="state.productDetails" v-show="!state.loader" />
@@ -6,7 +7,7 @@
         </div>
         <div class="col-span-12 md:col-span-8">
             <div v-show="!state.loader">
-                <p class="text-gray-600 text-sm pr-4 mb-4">
+                <p class="pr-4 mb-4 text-sm text-gray-600">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. A magni modi sequi aliquid. Quos iste voluptatem laudantium quia, at ad et facilis, odio, ab accusamus delectus quae repellendus vel a!
                 </p>
                 <ProductIncrement class="mb-4" />
@@ -16,10 +17,10 @@
             </div>
             <div v-show="state.loader">
                 <div class="animate-pulse">
-                    <div class="rounded bg-slate-200 h-20 mb-2"></div>
-                    <span class="flex flex-col gap-y-2 px-2">
-                        <span class="w-32 h-4 bg-slate-200 rounded"></span>
-                        <span class="w-32 h-4 bg-slate-200 rounded"></span>
+                    <div class="h-20 mb-2 rounded bg-slate-200"></div>
+                    <span class="flex flex-col px-2 gap-y-2">
+                        <span class="w-32 h-4 rounded bg-slate-200"></span>
+                        <span class="w-32 h-4 rounded bg-slate-200"></span>
                     </span>
                 </div>
             </div>
@@ -34,8 +35,10 @@ import ProductItemLoader from "@/components/ProductItemLoaderComponent.vue";
 import ProductIncrement from "@/components/ProductIncrementComponent.vue";
 import { product } from '@/http';
 import type { ProductResponse } from '@/models';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import { SimulationDelay } from "@/configs";
+
+const a = ref("gg")
 
 type StateModel = {
     productDetails: ProductResponse | null,
