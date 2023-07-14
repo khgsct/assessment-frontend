@@ -10,6 +10,10 @@ export const cart = () => {
         updateCart: (productId: string, quantity: number): Promise<void> => {
             return http().put('/api/v1/carts', { productId, quantity })
                 .then(response => response.data)
+        },
+        removeCartItem: (cartItemId: string): Promise<void> => {
+            return http().delete('/api/v1/carts/' + cartItemId)
+                .then(response => response.data)
         }
     }
 }

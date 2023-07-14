@@ -4,13 +4,18 @@
             <h2 class="title">Cart</h2>
         </div>
 
-        <div v-show="!state.loader">
+        <div class="col-span-12 text-center" v-if="!state.loader && state.cartInfo?.cartDetails.length == 0">
+            <span class="font-thin text-gray-500">Cart is empty</span>
+        </div>
+
+        <div v-show="!state.loader && state.cartInfo?.cartDetails.length! > 0">
             <div class="flex justify-between mb-2">
                 <span>Name</span>
                 <span>Amount</span>
             </div>
 
-            <div class="flex mb-2" v-bind:key="cartItem.id" v-for="cartItem in state.cartInfo?.cartDetails">
+            <div class="flex items-center mb-2" v-bind:key="cartItem.id" v-for="cartItem in state.cartInfo?.cartDetails">
+                <Icon icon="line-md:remove" class="cursor-pointer text-red-500" v-on:click="removeCartItem(cartItem.id)" />
                 <span class="text-[#737373] font-light pl-5">{{ cartItem.productName }}</span>
                 <span class="text-[#31241E] ml-auto flex items-center gap-x-2">
                     <span class="text-sm">{{ formatNumber(cartItem.productPrice) }}</span> <span>@</span> <ProductIncrement :quantity="cartItem.quantity" :min-value="1" @change="productQuantityChange(cartItem.productId, $event)" />
@@ -60,6 +65,7 @@
 
 <script setup lang="ts">
 import { RouterLink, useRouter } from 'vue-router';
+import { Icon } from '@iconify/vue';
 import ProductIncrement from "@/components/product/ProductIncrementComponent.vue";
 import { cart } from '@/http';
 import type { CartSummaryResponse } from '@/models';
@@ -136,6 +142,12 @@ const enqueueProductTask = (productId: string, quantity: number) => {
 const productQuantityChange = (productId: string, quantity: number) => {
     state.updating = true
     enqueueProductTask(productId, quantity)
+}
+
+const removeCartItem = (cartItemId: string) => {
+    state.loader = true
+    cart().removeCartItem(cartItemId)
+        .then(() => loadCartSummary())
 }
 
 const checkout = () => {
